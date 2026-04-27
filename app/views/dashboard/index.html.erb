@@ -13,3 +13,20 @@
     <li><%= task.title %> - <%= task.status %></li>
   <% end %>
 </ul>
+<h2>System Status</h2>
+
+<ul>
+  <li>Features: <%= @features.count %></li>
+  <li>Stories: <%= @stories.count %></li>
+  <li>Tasks: <%= @tasks.count %></li>
+  <li>Completed Tasks: <%= Task.where(status: "Done").count %></li>
+  <li>Blocked Tasks: <%= Task.where(status: "Blocked").count %></li>
+</ul>
+
+<%
+done = Task.where(status: "Done").count
+total = Task.count
+confidence = total > 0 ? ((done.to_f / total) * 100).round : 0
+%>
+
+<h3>Delivery Confidence: <%= confidence %>%</h3>

@@ -2,30 +2,41 @@
 
 <p><%= @story.description %></p>
 
-<strong>Acceptance Criteria:</strong>
+<h3>Acceptance Criteria</h3>
 <p><%= @story.acceptance_criteria %></p>
 
-<h2>Kanban Board</h2>
+<h2>Execution Board</h2>
 
-<div style="display: flex; gap: 40px;">
+<div style="display:flex; gap:20px;">
+
   <div>
     <h3>To Do</h3>
     <% @todo.each do |task| %>
-      <p>- <%= task.title %></p>
+      <div>
+        <%= task.title %><br>
+        <%= button_to "→ In Progress", task_path(task, status: "In Progress"), method: :patch %>
+      </div>
     <% end %>
   </div>
 
   <div>
     <h3>In Progress</h3>
     <% @in_progress.each do |task| %>
-      <p>- <%= task.title %></p>
+      <div>
+        <%= task.title %><br>
+        <%= button_to "→ Done", task_path(task, status: "Done"), method: :patch %>
+      </div>
     <% end %>
   </div>
 
   <div>
     <h3>Done</h3>
     <% @done.each do |task| %>
-      <p>- <%= task.title %></p>
+      <div>
+        <%= task.title %><br>
+        <%= button_to "↺ Reset", task_path(task, status: "To Do"), method: :patch %>
+      </div>
     <% end %>
   </div>
+
 </div>

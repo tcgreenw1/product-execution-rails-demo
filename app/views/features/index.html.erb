@@ -1,12 +1,71 @@
-<h1>Backlog</h1>
+<h1 style="display:flex; justify-content:space-between; align-items:center;">
+  Product Backlog
 
-<% @features.each do |feature| %>
-  <div>
-    <h2>
-      <%= link_to feature.title, feature_path(feature) %>
-      (<%= feature.priority %>)
-    </h2>
-    <p><%= feature.description %></p>
-    <p>Status: <%= feature.status %></p>
-  </div>
-<% end %>
+</h1>
+  <%= link_to "＋ New Feature", new_feature_path,
+  style: "padding:8px 14px; border-radius:8px; background:#0ea5e9; color:white; font-weight:600; text-decoration:none; font-size:14px;" %>
+<h3>Filter</h3>
+<div style="
+  margin-bottom:20px;
+  padding:10px 14px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+">
+  <%= link_to "All", features_path, style:"font-weight:600;" %>
+  <%= link_to "In Progress", features_path(status: "In Progress") %>
+  <%= link_to "Planned", features_path(status: "Planned") %>
+  <%= link_to "Done", features_path(status: "Done") %>
+</div>
+
+<table style="width:100%; border-collapse: collapse; background: rgba(255,255,255,0.03); border-radius:12px; overflow:hidden;">
+  
+  <thead>
+    <tr style="background: rgba(255,255,255,0.06); text-align:left;">
+      <th style="padding:12px;">
+        <%= link_to "Feature", features_path(sort: "title") %>
+      </th>
+      <th style="padding:12px;">
+        <%= link_to "Priority", features_path(sort: "priority") %>
+      </th>
+      <th style="padding:12px;">
+        <%= link_to "Status", features_path(sort: "status") %>
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @features.each do |feature| %>
+      <tr style="border-top:1px solid rgba(255,255,255,0.08); transition: background 0.2s;">
+        
+        <td style="padding:14px; vertical-align:top; word-wrap:break-word;">
+          <strong>
+            <%= link_to feature.title, feature_path(feature) %>
+          </strong>
+          <div style="margin-top:6px; font-size:13px; color:#94a3b8; line-height:1.4;">
+            <%= feature.description %>
+          </div>
+        </td>
+
+        <td style="padding:14px; vertical-align:top;">
+          <span style="
+            padding:4px 8px;
+            border-radius:6px;
+            background:<%= feature.priority == 'P0' ? '#ef4444' : feature.priority == 'P1' ? '#facc15' : '#38bdf8' %>;
+            color:black;
+            font-weight:600;
+          ">
+            <%= feature.priority %>
+          </span>
+        </td>
+
+        <td style="padding:14px; vertical-align:top;">
+          <%= feature.status %>
+        </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
