@@ -1,0 +1,31 @@
+<h1><%= @story.title %></h1>
+
+<p><%= @story.description %></p>
+
+<strong>Acceptance Criteria:</strong>
+<p><%= @story.acceptance_criteria %></p>
+
+<h2>Kanban Board</h2>
+
+<div style="display: flex; gap: 40px;">
+  <div>
+    <h3>To Do</h3>
+    <% @todo.each do |task| %>
+      <p>- <%= task.title %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <h3>In Progress</h3>
+    <% @in_progress.each do |task| %>
+      <p>- <%= task.title %></p>
+    <% end %>
+  </div>
+
+  <div>
+    <h3>Done</h3>
+    <% @done.each do |task| %>
+      <p>- <%= task.title %></p>
+    <% end %>
+  </div>
+</div>

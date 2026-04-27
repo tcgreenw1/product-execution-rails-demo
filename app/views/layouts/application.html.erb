@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ProductDemo</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Arial, sans-serif;
+        color: #f8fafc;
+        background:
+          radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.22), transparent 26%),
+          radial-gradient(circle at 85% 20%, rgba(250, 204, 21, 0.14), transparent 22%),
+          radial-gradient(circle at 50% 100%, rgba(14, 165, 233, 0.18), transparent 34%),
+          linear-gradient(135deg, #020617 0%, #0f172a 48%, #111827 100%);
+        padding: 34px;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background:
+          linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+        opacity: 0.35;
+        mask-image: linear-gradient(to bottom, black, transparent 78%);
+      }
+
+     
+
+      nav {
+        position: sticky;
+        top: 22px;
+        z-index: 20;
+        max-width: 1080px;
+        margin: 0 auto 32px;
+        padding: 12px;
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 28px;
+        background: rgba(8, 13, 23, 0.66);
+        backdrop-filter: blur(24px) saturate(160%);
+        -webkit-backdrop-filter: blur(24px) saturate(160%);
+        box-shadow:
+          0 20px 70px rgba(0,0,0,0.46),
+          inset 0 1px 0 rgba(255,255,255,0.12);
+      }
+
+      nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 4px;
+        padding: 11px 16px;
+        color: #dbeafe;
+        text-decoration: none;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 750;
+        letter-spacing: 0.01em;
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.08);
+        transition: transform 0.22s ease, background 0.22s ease, color 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      nav a:hover {
+        color: #ffffff;
+        background: linear-gradient(135deg, rgba(14,165,233,0.34), rgba(250,204,21,0.18));
+        transform: translateY(-2px);
+        box-shadow:
+          0 12px 30px rgba(14,165,233,0.22),
+          inset 0 1px 0 rgba(255,255,255,0.20);
+      }
+
+      main {
+        position: relative;
+        z-index: 2;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: clamp(28px, 5vw, 54px);
+        border-radius: 34px;
+        background:
+          linear-gradient(145deg, rgba(255,255,255,0.10), rgba(255,255,255,0.035)),
+          rgba(2, 6, 23, 0.62);
+        border: 1px solid rgba(255,255,255,0.16);
+        backdrop-filter: blur(26px) saturate(150%);
+        -webkit-backdrop-filter: blur(26px) saturate(150%);
+        box-shadow:
+          0 34px 110px rgba(0,0,0,0.52),
+          inset 0 1px 0 rgba(255,255,255,0.16);
+        overflow: hidden;
+        animation: pageIn 0.2s ease both;
+      }
+
+      main::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 20% 0%, rgba(255,255,255,0.16), transparent 24%),
+          linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.06) 45%, transparent 58%);
+        pointer-events: none;
+      }
+
+      @keyframes pageIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px) scale(0.985);
+          filter: blur(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
+      h1, h2, h3, p, ul, li, a, strong {
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        margin: 0 0 18px;
+        max-width: 850px;
+        font-size: clamp(42px, 7vw, 78px);
+        line-height: 0.92;
+        letter-spacing: -0.075em;
+        color: #ffffff;
+        text-shadow: 0 18px 60px rgba(14,165,233,0.18);
+      }
+
+      h1::after {
+        content: "";
+        display: block;
+        width: 110px;
+        height: 5px;
+        margin-top: 22px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #38bdf8, #facc15);
+        box-shadow: 0 0 26px rgba(56,189,248,0.45);
+      }
+
+      h2 {
+        margin-top: 36px;
+        margin-bottom: 12px;
+        font-size: 25px;
+        color: #e5e7eb;
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        margin-top: 18px;
+        color: #bae6fd;
+        letter-spacing: -0.02em;
+      }
+
+      p, li {
+        color: #cbd5e1;
+        font-size: 17px;
+        line-height: 1.72;
+      }
+
+      ul {
+        padding-left: 0;
+        list-style: none;
+      }
+
+      li {
+        margin: 10px 0;
+        padding-left: 28px;
+      }
+
+      li::before {
+        content: "✦";
+        position: absolute;
+        margin-left: -26px;
+        color: #facc15;
+        font-size: 13px;
+      }
+
+      a {
+        color: #7dd3fc;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #fde68a;
+      }
+
+      strong {
+        color: #ffffff;
+      }
+
+      main > div {
+        position: relative;
+        z-index: 1;
+        padding: 22px;
+        margin: 18px 0;
+        border-radius: 26px;
+        background:
+          linear-gradient(145deg, rgba(255,255,255,0.09), rgba(255,255,255,0.025));
+        border: 1px solid rgba(255,255,255,0.13);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.12),
+          0 18px 45px rgba(0,0,0,0.24);
+        transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      main > div:hover {
+        transform: translateY(-4px);
+        border-color: rgba(125,211,252,0.38);
+        box-shadow:
+          inset 0 1px 0 rgba(255,255,255,0.18),
+          0 24px 58px rgba(14,165,233,0.16);
+      }
+
+      @media (max-width: 700px) {
+        body {
+          padding: 18px;
+        }
+
+        nav {
+          position: relative;
+          top: 0;
+        }
+
+        nav a {
+          width: calc(50% - 12px);
+        }
+
+        main {
+          border-radius: 26px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <%= link_to "Home", root_path %>
+      <%= link_to "Dashboard", "/dashboard/index" %>
+      <%= link_to "Backlog", features_path %>
+      <%= link_to "Stories", stories_path %>
+      <%= link_to "Technical Notes", "/technical" %>
+    </nav>
+
+    <main>
+      <%= yield %>
+    </main>
+  </body>
+</html>

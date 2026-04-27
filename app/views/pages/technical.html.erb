@@ -1,0 +1,35 @@
+<h1>Technical Notes</h1>
+
+<h2>System Overview</h2>
+<p>
+This system models a workflow where missed customer interactions trigger automated responses and are tracked through structured product and execution layers.
+</p>
+
+<h2>Data Model</h2>
+<ul>
+  <li>Feature → high-level product capability</li>
+  <li>Story → user-focused requirement with acceptance criteria</li>
+  <li>Task → execution-level work item</li>
+</ul>
+
+<h2>Architecture</h2>
+<ul>
+  <li>Rails MVC structure</li>
+  <li>Controllers handle request flow</li>
+  <li>Models represent product and execution layers</li>
+  <li>Views display structured product data</li>
+</ul>
+
+<h2>Tradeoffs</h2>
+<ul>
+  <li>Monolithic Rails app for simplicity and speed</li>
+  <li>No authentication to reduce friction for demo</li>
+  <li>Static seeded data instead of live integrations</li>
+</ul>
+
+<h2>Future Improvements</h2>
+<ul>
+  <li>Integrate SMS API (Twilio)</li>
+  <li>Add real-time updates</li>
+  <li>Introduce user roles and permissions</li>
+</ul>

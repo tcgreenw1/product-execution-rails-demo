@@ -1,0 +1,15 @@
+<h1>Product Execution Dashboard</h1>
+
+<h2>Metrics</h2>
+<ul>
+  <li>Total Features: <%= @features.count %></li>
+  <li>Total Stories: <%= @stories.count %></li>
+  <li>Total Tasks: <%= @tasks.count %></li>
+</ul>
+
+<h2>Recent Work</h2>
+<ul>
+  <% @tasks.each do |task| %>
+    <li><%= task.title %> - <%= task.status %></li>
+  <% end %>
+</ul>

@@ -1,0 +1,12 @@
+<h1>Backlog</h1>
+
+<% @features.each do |feature| %>
+  <div>
+    <h2>
+      <%= link_to feature.title, feature_path(feature) %>
+      (<%= feature.priority %>)
+    </h2>
+    <p><%= feature.description %></p>
+    <p>Status: <%= feature.status %></p>
+  </div>
+<% end %>
